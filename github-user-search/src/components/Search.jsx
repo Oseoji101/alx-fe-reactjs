@@ -15,7 +15,7 @@ function Search () {
         setInput(e.target.value);               
     }
 
-    const handlesubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         query = input.trim();
         if (!query) return;
@@ -35,7 +35,7 @@ function Search () {
     };
 
     return (
-        <form onsubmit={handlesubmit}>
+        <form onSubmit={handlesubmit}>
             <label htmlFor="search"></label>
             <input  
             type="text"
@@ -50,8 +50,8 @@ function Search () {
         </form>
 
     {/* Conditional rendering */}
-      {loading && <p>Loading...</p>} {/* show loading */}
-      {error && <p>Looks like we can’t find the user.</p>} {/* show error */}
+      {loading && <p>Loading...</p>}
+      {error && <p>"Looks like we cant find the user".</p>}
       {user && (
         <div>
           <img src={user.avatar_url} alt={user.login} width="50" />
