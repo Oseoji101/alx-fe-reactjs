@@ -65,4 +65,14 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+
+  @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional global styles */
+body {
+  @apply bg-gray-100 text-gray-900;
+}
+
 }

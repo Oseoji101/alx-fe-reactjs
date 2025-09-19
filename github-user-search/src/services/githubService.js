@@ -1,9 +1,26 @@
-async function fetchUserData(username) {
-    try {
-        const response = await axios.get(`https://api.github.com/users/${username}`)
-        return response.data;
+ import axios from 'axios';
 
-    } catch error {
+ async function fetchUserData(username, location, minirepos) {
+
+    try {
+        let query = "";
+        if (username) {
+            query += `${username} in:login`;
+        }
+
+        if (location) {
+            query += `Location: ${location}` ;
+        }
+        if (minirepos) {
+            query += `repos:>=${minirepos}`;
+        }
+        query = query.trim();
+
+        const response = await axios.get(`https://api.github.com/search/users?q=${query}`);
+        
+        return response.data.items;
+
+     } catch (error) {
         console.error("Looks like we cant find the user:", error);
         throw error;
     }   
