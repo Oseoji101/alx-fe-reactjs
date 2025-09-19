@@ -1,6 +1,6 @@
  import axios from 'axios';
 
- async function fetchUserData(username, location, minirepos) {
+ async function fetchUserData(username, location, minRepos) {
 
     try {
         let query = "";
@@ -11,8 +11,8 @@
         if (location) {
             query += `Location: ${location}` ;
         }
-        if (minirepos) {
-            query += `repos:>=${minirepos}`;
+        if (minRepos) {
+            query += `repos:>=${minRepos}`;
         }
         query = query.trim();
 
