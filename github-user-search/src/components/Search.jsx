@@ -26,7 +26,7 @@ function Search () {
 
         setLoading(true);
         setError(false);
-        setUserData(null);
+        setUserData([]);
         
     try {
       const data = await fetchUserData(query);
@@ -37,6 +37,20 @@ function Search () {
       setLoading(false);
     }
     };
+
+    const handleLoadMore = async () => {
+    setLoading(true);
+    try {
+      const nextPage = page + 1;
+      const data = await fetchUserData(username, location, minirepos, nextPage);
+      setUserData((prev) => [...prev, ...data]); // append new results
+      setPage(nextPage);
+    } catch (err) {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
 
     return (
         <div className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-xl mt-8">
@@ -70,7 +84,7 @@ function Search () {
                 </div>
                 {/* minirepos */}
                 <div>
-                    <label htmlFor="mminirepos"></label>
+                    <label htmlFor="minirepos"></label>
                     <input 
                     type="number"
                     id="minirepos"
@@ -84,20 +98,50 @@ function Search () {
                  type="submit">Search</button>
 
             </form>
-            {/* conditional */}
-            {loading && <p>Loading...</p>}
-            {error && <p>Looks like we can't find the user.</p>}
-            {userData && (
-            <div>
-              <img src={userData.avatar_url} alt={userData.login} width="50" />
-              <p>{userData.name || userData.login}</p>
-              <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
-                View Profile
-              </a>
-            </div>
-          )}
-        </div>
-        </div>
+            {/* Results */}
+      <div className="mt-6">
+        {loading && <p>Loading...</p>}
+        {error && <p className="text-red-500">Looks like we can't fetch users.</p>}
+
+        {userData.length > 0 && (
+          <ul className="space-y-4">
+            {userData.map((user) => (
+              <li
+                key={userData.id}
+                className="flex items-center space-x-4 p-4 border rounded-lg"
+              >
+                <img
+                  src={userData.avatar_url}
+                  alt={userData.login}
+                  className="w-12 h-12 rounded-full"
+                />
+                <div>
+                  <p className="font-bold">{userData.login}</p>
+                  <a
+                    href={userData.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 underline"
+                  >
+                    View Profile
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {/* Load More Button */}
+        {userData.length > 0 && (
+          <button
+            onClick={handleLoadMore}
+            className="mt-4 w-full bg-gray-200 py-2 rounded-lg hover:bg-gray-300"
+          >
+            Load More
+          </button>
+        )}
+      </div>
+    </div>
     ); 
 }
 export default Search;
