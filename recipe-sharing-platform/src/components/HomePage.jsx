@@ -26,11 +26,10 @@ const Homepage = () => {
                         <h2 className='text-2xl font-semibold text-gray-800 mb-2'>{recipe.title}</h2>
                         <p className='text-gray-600'>{recipe.summary}</p>
                     </div>
-                    <a
-                href={`/recipes/${recipe.id}`}
+                    <Link to={`/recipes/${recipe.id}`}
                 className="mt-auto inline-block bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg text-center transition-colors hover:bg-blue-600">
                 View Recipe
-                </a>
+                </Link>
 
                 </div>
                 ))}
