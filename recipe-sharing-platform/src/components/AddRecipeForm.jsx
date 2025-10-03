@@ -50,13 +50,13 @@ const AddRecipeForm = () => {
 
   return (
     <div className="p-6 max-w-2xl mx-auto bg-white rounded-xl shadow-lg mt-10">
-      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
+      <h1 className="text-3xl md:text-3xl font-bold mb-6 text-center text-gray-800">
         ➕ Add a New Recipe
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Recipe Title */}
-        <div>
+        <div className="md:flex md:space-x-4">
           <label className="block text-gray-700 font-medium mb-2">
             Recipe Title
           </label>
@@ -109,7 +109,7 @@ const AddRecipeForm = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition-colors"
+          className="w-full md:w-auto bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition-colors"
         >
           Submit Recipe
         </button>
