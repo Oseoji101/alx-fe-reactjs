@@ -32,6 +32,12 @@ const Homepage = () => {
                 View Recipe
                 </Link>
 
+                <Link to="/add-recipe"
+                 className="block w-max mx-auto mb-8 bg-green-500 text-white font-semibold px-6 py-3 rounded-lg hover:bg-green-600 transition-colors"        >
+                 ➕ Add a New Recipe
+                </Link>
+
+
                 </div>
                 ))}
             </div>
