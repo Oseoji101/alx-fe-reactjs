@@ -1,5 +1,30 @@
 import React, { useState } from "react";
 
+
+export function validate({ title, ingredients, instructions }) {
+  const errors = {};
+
+
+  if (!title || !title.trim()) {
+    errors.title = "Recipe title is required.";
+  }
+
+  const ingredientsList = (ingredients || "")
+    .split("\n")
+    .map((item) => item.trim())
+    .filter((item) => item.length > 0);
+
+  if (ingredientsList.length < 2) {
+    errors.ingredients = "Please enter at least two ingredients.";
+  }
+
+  if (!instructions || !instructions.trim()) {
+    errors.instructions = "Preparation steps are required.";
+  }
+
+  return errors;
+}
+
 const AddRecipeForm = () => {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
@@ -9,35 +34,13 @@ const AddRecipeForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    let validationErrors = {};
+    const validationErrors = validate({ title, ingredients, instructions });
 
-    // Title check
-    if (!title.trim()) {
-      validationErrors.title = "Recipe title is required.";
-    }
-
-    // Ingredients check (at least 2 lines)
-    const ingredientsList = ingredients
-      .split("\n")
-      .map((item) => item.trim())
-      .filter((item) => item.length > 0);
-
-    if (ingredientsList.length < 2) {
-      validationErrors.ingredients = "Please enter at least two ingredients.";
-    }
-
-    // Instructions check
-    if (!instructions.trim()) {
-      validationErrors.instructions = "Preparation steps are required.";
-    }
-
-    // Stop if errors exist
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
 
-    // Success
     alert("Recipe submitted successfully ✅");
     setTitle("");
     setIngredients("");
