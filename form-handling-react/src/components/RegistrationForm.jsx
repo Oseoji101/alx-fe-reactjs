@@ -27,7 +27,7 @@ const handleChange = (e) => {
             username:
             <input type="text" 
             name="username"
-            value={formData.username}
+            value={username}
             placeholder="Enter your username"
             onChange={handleChange}/>
 
@@ -37,7 +37,7 @@ const handleChange = (e) => {
             email:
             <input type="email" 
             name="email"
-            value={formData.email}
+            value={email}
             placeholder="Enter your email"
             onChange={handleChange}/>
         </label>
@@ -45,7 +45,7 @@ const handleChange = (e) => {
         <label>
             <input type="password" 
             name="password"
-            value={formData.password}
+            value={password}
             placeholder="Enter your password"
             onChange={handleChange}/>
         </label>
