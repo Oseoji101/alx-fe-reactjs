@@ -17,22 +17,23 @@ const handleChange = (e) => {
     e.preventDefault();
     const newErrors = {};
 
-    if (!formData.username) {
+    const { username, email, password } = formData;
+
+    if (!username) {
       newErrors.username = "Username is required";
     }
 
-    if (!formData.email) {
+    if (!email) {
       newErrors.email = "Email is required";
     }
 
-    if (!formData.password) {
+    if (!password) {
       newErrors.password = "Password is required";
     }
+
     setErrors(newErrors);
 
-    if (Object.keys(newErrors).length > 0) {
-      return;
-    }
+    if (Object.keys(newErrors).length > 0) return;
 
     console.log("Form submitted:", formData);
     alert("Form submitted successfully!");
@@ -41,6 +42,8 @@ const handleChange = (e) => {
     setErrors({});
   };
 
+  const { username, email, password } = formData;
+
 return (
     <form onSubmit={handleSubmit}>
         <label>
@@ -48,7 +51,7 @@ return (
             <input
               type="text"
               name="username"
-              value={formData.username}
+              value={username}
               placeholder="Enter your username"
               onChange={handleChange}
             />
@@ -60,7 +63,7 @@ return (
             <input
               type="email"
               name="email"
-              value={formData.email}
+              value={email}
               placeholder="Enter your email"
               onChange={handleChange}
             />
@@ -72,7 +75,7 @@ return (
             <input
               type="password"
               name="password"
-              value={formData.password}
+              value={password}
               placeholder="Enter your password"
               onChange={handleChange}
             />
