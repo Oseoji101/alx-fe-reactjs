@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 
-const validation = Yup.object({
+const validationSchema = Yup.object({
   username: Yup.string()
     .min(3, "Username must be at least 3 characters")
     .required("Username is required"),
@@ -26,7 +26,7 @@ function FormikForm() {
           email: "",
           password: "",
         }}
-        validation={validation}
+        validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
           console.log("Submitted:", values);
           alert("Form submitted successfully!");
