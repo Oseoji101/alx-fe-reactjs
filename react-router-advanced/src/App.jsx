@@ -3,6 +3,8 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Profile from "./components/Profile";
 import NotFound from "./components/NotFound";
+import ProtectedRoute from "./components/ProtectedRoute";
+const isLoggedIn = false;
 
 function App() {
   return (
@@ -16,8 +18,18 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/profile/*" element={<Profile />} /> 
+        <Route
+    path="/profile/*"
+    element={
+      <ProtectedRoute isAuthenticated={isLoggedIn}>
+        <Profile />
+      </ProtectedRoute>
+    }
+  /> 
         <Route path="*" element={<NotFound />} />
+        <Route path="/posts" element={<Posts />} />
+<Route path="/posts/:id" element={<PostDetail />} />
+
       </Routes>
     </Router>
   );
