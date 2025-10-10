@@ -27,8 +27,8 @@ function App() {
     }
   /> 
         <Route path="*" element={<NotFound />} />
-        <Route path="/posts" element={<Posts />} />
-<Route path="/posts/:id" element={<PostDetail />} />
+        <Route path="/blog" element={<Blog />} />
+<Route path="/blog/:id" element={<BlogPost />} />
 
       </Routes>
     </Router>
